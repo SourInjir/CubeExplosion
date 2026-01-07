@@ -24,7 +24,6 @@ public class ExplosionSpawner: ObjectSpawner
         var explosion = _pool.Get();
         var explosionController = explosion.GetComponent<ExplosionController>();
         explosionController.Initialize(PrepareDto(position));
-        Physics.Raycast()
         _pool.ReturnWithDelay(explosion, ObjectLifeTime);
     }
 
