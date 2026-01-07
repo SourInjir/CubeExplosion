@@ -13,6 +13,7 @@ public class ExplosionSpawner: ObjectSpawner
     {
         _eventChannel.ExplosionRequested -= HandleSpawnEvent;
     }
+
     protected override void SubscribeToEvents()
     {
         _eventChannel.ExplosionRequested += HandleSpawnEvent;
@@ -23,7 +24,7 @@ public class ExplosionSpawner: ObjectSpawner
         var explosion = _pool.Get();
         var explosionController = explosion.GetComponent<ExplosionController>();
         explosionController.Initialize(PrepareDto(position));
-
+        Physics.Raycast()
         _pool.ReturnWithDelay(explosion, ObjectLifeTime);
     }
 
@@ -38,7 +39,7 @@ public class ExplosionSpawner: ObjectSpawner
     }
 
     private void HandleSpawnEvent(Vector3 position)
-    {;
+    {
         SpawnObject(position);
     }
 
