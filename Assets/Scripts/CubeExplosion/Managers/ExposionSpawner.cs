@@ -4,7 +4,7 @@ public class ExplosionSpawner: ObjectSpawner
 {
     private float _maxRadius = 100.0f;
     private float _maxForce = 100.0f;
-    private const float ObjectLifeTime = 20.0f;
+    private const float ObjectLifeTime = 2.0f;
     public ExplosionSpawner(Pool pool, SystemEventChannel eventChannel): base(pool, eventChannel)
     {
     }
