@@ -46,7 +46,7 @@ public class CubeController : MonoBehaviour
     {
         transform.position = _cubeData.Position;
         transform.localScale = _cubeData.Scale;
-        _renderer.material.color = new Color(Random.value, Random.value, Random.value);
+        _renderer.material.color = _cubeData.Color;
         if (useForce)
             _rigidbody.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
     }
