@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4483174248546191020}
   - component: {fileID: 3057597272160266233}
   - component: {fileID: 7789841202844326724}
-  - component: {fileID: 7147681773381148748}
+  - component: {fileID: 3893535121998607111}
   m_Layer: 0
   m_Name: ExplosionWave
   m_TagString: Untagged
@@ -4895,7 +4895,7 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
---- !u!114 &7147681773381148748
+--- !u!114 &3893535121998607111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4904,18 +4904,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 7580871036319728619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5bf712ffa22bf94882dcb4cb01f4a07, type: 3}
+  m_Script: {fileID: 11500000, guid: 37a565e7ea450d24f9e260be1b969a8f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ExplosionController
-  _maxRadius: 100
+  m_EditorClassIdentifier: Assembly-CSharp::ExplosionObject
+  _maxRadius: 5
   _expansionSpeed: 10
-  _maxForce: 20
+  _maxForce: 100
   _forceFalloffCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -1.0034492
-      value: 1.0080938
+      time: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -4923,8 +4923,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.9907837
-      value: -0.078372955
+      time: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

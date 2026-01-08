@@ -1,17 +1,21 @@
 // ExplosionController.cs
 using UnityEngine;
 
-public class ExplosionController : MonoBehaviour
+public class ExplosionObject : MonoBehaviour
 {
     [SerializeField] private float _maxRadius = 5f;
     [SerializeField] private float _expansionSpeed = 10f;
     [SerializeField] private float _maxForce = 100f;
     [SerializeField] private AnimationCurve _forceFalloffCurve = AnimationCurve.EaseInOut(0, 1, 1, 0);
-    [SerializeField] private LayerMask _affectedLayers = -1; // Все слои
+    [SerializeField] private LayerMask _affectedLayers = -1;
+
+    private const float SpeedFactor = 0.5f;
+    private const float RadiusFactor = 0.1f;
 
     private ParticleSystem _particleSystem;
     private float _currentRadius = 0f;
     private bool _isExpanding = true;
+   
 
     private void Awake()
     {
@@ -20,12 +24,11 @@ public class ExplosionController : MonoBehaviour
 
     private void Start()
     {
-        // Настраиваем Particle System под параметры взрыва
         var main = _particleSystem.main;
-        main.startSpeed = _expansionSpeed * 0.5f;
+        main.startSpeed = _expansionSpeed * SpeedFactor;
 
         var shape = _particleSystem.shape;
-        shape.radius = _maxRadius * 0.1f;
+        shape.radius = _maxRadius * RadiusFactor;
     }
 
     private void OnEnable()
@@ -35,20 +38,18 @@ public class ExplosionController : MonoBehaviour
 
     private void Update()
     {
-        if (!_isExpanding) return;
+        if (_isExpanding == false) 
+            return;
 
         _currentRadius += _expansionSpeed * Time.deltaTime;
 
         if (_currentRadius >= _maxRadius)
         {
             _isExpanding = false;
-            //StartCoroutine(DestroyAfterDelay(1f));
-
             gameObject.SetActive(false);
             return;
         }
         UpdateVisualEffect();
-        //ApplyExplosionForce();
     }
 
     private void OnDrawGizmosSelected()
@@ -59,7 +60,6 @@ public class ExplosionController : MonoBehaviour
 
     private void ApplyExplosionForce()
     {
-        // Находим все объекты в радиусе взрыва
         Collider[] colliders = Physics.OverlapSphere(transform.position, _maxRadius, _affectedLayers);
 
         foreach (Collider collider in colliders)
@@ -70,7 +70,6 @@ public class ExplosionController : MonoBehaviour
                 float distance = Vector3.Distance(transform.position, collider.transform.position);
                 float normalizedDistance = Mathf.Clamp01(distance / _maxRadius);
 
-                // Применяем затухание силы по кривой
                 float forceMultiplier = _forceFalloffCurve.Evaluate(normalizedDistance);
                 float force = _maxForce * forceMultiplier;
 
@@ -81,19 +80,11 @@ public class ExplosionController : MonoBehaviour
 
     private void UpdateVisualEffect()
     {
-        // Обновляем визуальные параметры Particle System
         if (_particleSystem != null)
         {
             var shape = _particleSystem.shape;
-            shape.radius = _currentRadius * 0.5f;
+            shape.radius = _currentRadius * RadiusFactor;
         }
-    }
-
-    private System.Collections.IEnumerator DestroyAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        Destroy(gameObject);
-        // Или возвращаем в пул, если используете pooling для эффектов
     }
 
     public void Initialize(ExplosionData explosionData)

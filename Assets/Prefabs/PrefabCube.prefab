@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2057491106976385836}
   - component: {fileID: 5767939317906022830}
   - component: {fileID: 61473044106104180}
-  - component: {fileID: 7169823807359797324}
   - component: {fileID: 9198862190594063944}
+  - component: {fileID: 5080057957670108582}
   m_Layer: 0
   m_Name: PrefabCube
   m_TagString: Untagged
@@ -113,8 +113,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.1085377, y: 1.0148437, z: 1.0646982}
+  m_Center: {x: -0.019416928, y: 0.010959506, z: -0.03234929}
 --- !u!54 &61473044106104180
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,23 +142,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7169823807359797324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5526797130167910090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe8965903f7f2b84892d62a179ae52a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CubeController
-  _renderer: {fileID: 2057491106976385836}
-  _rigidbody: {fileID: 61473044106104180}
-  _eventChannel: {fileID: 11400000, guid: f06c9655908496c43aaa731503d65dea, type: 2}
-  _explosionRadius: 10
-  _explosionForce: 500
 --- !u!65 &9198862190594063944
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -178,5 +161,17 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0232378, y: 1.0479717, z: 1.0658488}
+  m_Center: {x: -0.025399685, y: 0.023985863, z: -0.023977906}
+--- !u!114 &5080057957670108582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5526797130167910090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2535d3abb3c2645b54ca2e5f1fd976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickableObject

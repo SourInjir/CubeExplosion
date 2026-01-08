@@ -5,24 +5,17 @@ public class ExplosionSpawner: ObjectSpawner
     private float _maxRadius = 100.0f;
     private float _maxForce = 100.0f;
     private const float ObjectLifeTime = 2.0f;
-    public ExplosionSpawner(Pool pool, SystemEventChannel eventChannel): base(pool, eventChannel)
+
+    public ExplosionSpawner(Pool pool, float radius, float force): base(pool)
     {
+        _maxForce = force;
+        _maxRadius = radius;
     }
 
-    public override void Dispose()
-    {
-        _eventChannel.ExplosionRequested -= HandleSpawnEvent;
-    }
-
-    protected override void SubscribeToEvents()
-    {
-        _eventChannel.ExplosionRequested += HandleSpawnEvent;
-    }
-
-    protected override void SpawnObject(Vector3 position)
+    public override void SpawnObject(Vector3 position)
     {
         var explosion = _pool.Get();
-        var explosionController = explosion.GetComponent<ExplosionController>();
+        var explosionController = explosion.GetComponent<ExplosionObject>();
         explosionController.Initialize(PrepareDto(position));
         _pool.ReturnWithDelay(explosion, ObjectLifeTime);
     }
@@ -35,11 +28,6 @@ public class ExplosionSpawner: ObjectSpawner
             Radius = _maxRadius,
             Force = _maxForce,
         };
-    }
-
-    private void HandleSpawnEvent(Vector3 position)
-    {
-        SpawnObject(position);
     }
 
 }
