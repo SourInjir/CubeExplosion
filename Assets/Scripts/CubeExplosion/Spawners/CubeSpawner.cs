@@ -30,6 +30,7 @@ public class CubeSpawner: ObjectSpawner
         var obj = _pool.Get();
         obj.transform.position = position;
         obj.transform.localScale = scale * ScaleFactor;
+
         if (obj.TryGetComponent<Renderer>(out var renderer))
         {
             renderer.material.color = new Color(Random.value, Random.value, Random.value);
@@ -39,6 +40,7 @@ public class CubeSpawner: ObjectSpawner
         {
             rb.AddExplosionForce(_force, obj.transform.position, _radius);
         }
+
         _pool.ReturnWithDelay(obj, ObjectLifeTime);
         return obj;
     }
@@ -51,10 +53,13 @@ public class CubeSpawner: ObjectSpawner
         for (int i = 0; i < count; i++)
         {
             var objInstance = SpawnObject(position, scale);
+
             if (objInstance.TryGetComponent<Rigidbody>(out var rb))
             {
                 rb.AddExplosionForce(_force, objInstance.transform.position, _radius);
             }
+
         }
+
     }
 }

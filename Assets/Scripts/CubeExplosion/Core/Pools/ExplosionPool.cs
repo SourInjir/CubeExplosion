@@ -19,8 +19,10 @@ public class ExposionPool : Pool
 
     override public GameObject Get()
     {
+
         if (_pool.Count == 0)
             CreateNewObject();
+
         var obj = _pool.Dequeue();
         obj.SetActive(false);
         return obj;

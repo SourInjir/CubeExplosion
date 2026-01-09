@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class ExplosionObject : MonoBehaviour
 {
+    private const float SpeedFactor = 0.5f;
+    private const float RadiusFactor = 0.1f;
+
     [SerializeField] private float _maxRadius = 5f;
     [SerializeField] private float _expansionSpeed = 10f;
     [SerializeField] private float _maxForce = 100f;
     [SerializeField] private AnimationCurve _forceFalloffCurve = AnimationCurve.EaseInOut(0, 1, 1, 0);
     [SerializeField] private LayerMask _affectedLayers = -1;
-
-    private const float SpeedFactor = 0.5f;
-    private const float RadiusFactor = 0.1f;
 
     private ParticleSystem _particleSystem;
     private float _currentRadius = 0f;
@@ -49,6 +49,7 @@ public class ExplosionObject : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
+
         UpdateVisualEffect();
     }
 
@@ -64,6 +65,7 @@ public class ExplosionObject : MonoBehaviour
 
         foreach (Collider collider in colliders)
         {
+
             if (collider.TryGetComponent<Rigidbody>(out var rb))
             {
                 Vector3 direction = (collider.transform.position - transform.position).normalized;
@@ -75,16 +77,19 @@ public class ExplosionObject : MonoBehaviour
 
                 rb.AddForce(direction * force, ForceMode.Impulse);
             }
+
         }
     }
 
     private void UpdateVisualEffect()
     {
+
         if (_particleSystem != null)
         {
             var shape = _particleSystem.shape;
             shape.radius = _currentRadius * RadiusFactor;
         }
+
     }
 
     public void Initialize(ExplosionData explosionData)

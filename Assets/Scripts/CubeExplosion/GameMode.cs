@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class GameMode : MonoBehaviour
 {
+    private const float SpawnChanse = 100f;
+    private const int MinSpawnCount = 2;
+    private const int MaxSpawnCount = 6;
+
     [Header("Dependencies")]
     [SerializeField] private SystemEventChannel _systemEventChannel;
     [SerializeField] private CubePool _cubePool;
@@ -14,13 +18,10 @@ public class GameMode : MonoBehaviour
     [SerializeField] private float _spawnExplosionForce = 100f;
 
     private float spawnFactor = 1f;
-    private const float SpawnChanse = 100f;
+   
 
     private CubeSpawner _cubeSpawner;
     private ExplosionSpawner _explosionSpawner;
-
-    private const int MinSpawnCount = 2;
-    private const int MaxSpawnCount = 6;
 
     private void Awake()
     {
@@ -52,6 +53,7 @@ public class GameMode : MonoBehaviour
 
     private void HandleSpawnEvent(GameObject obj)
     {
+
         if (CanSpawn() == true)
         {
             _cubeSpawner.SpawnRandomQuantity(MinSpawnCount, MaxSpawnCount, obj.transform.position, obj.transform.localScale);
@@ -61,6 +63,7 @@ public class GameMode : MonoBehaviour
         {
             _explosionSpawner.SpawnObject(obj.transform.position);
         }
+
         obj.SetActive(false);
 
     }

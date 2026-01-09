@@ -1,12 +1,19 @@
 // CubeEventChannel.cs
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 
 public class SystemEventChannel : MonoBehaviour
 {
-    public UnityAction<GameObject> ObjectClicked;
+    public event Action<GameObject> ObjectClicked;
+    public event Action LeftMouseClick;
+
     public void DispatchEvent(GameObject obj)
     {
         ObjectClicked?.Invoke(obj);
+    }
+
+    public void DispatchMouseClickEvent()
+    {
+        LeftMouseClick?.Invoke();
     }
 }

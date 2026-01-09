@@ -6,7 +6,7 @@ public abstract class Pool : MonoBehaviour
 {
     [SerializeField] protected GameObject _objectPrefab;
     protected abstract int GetInitialPoolSize { get; }
-    protected abstract string GetPoolName { get;}
+    protected abstract string GetPoolName { get; }
     
     protected Queue<GameObject> _pool = new Queue<GameObject>();
     protected Transform _poolContainer;
@@ -22,10 +22,12 @@ public abstract class Pool : MonoBehaviour
 
     protected void InitializePool()
     {
+
         for (int i = 0; i < GetInitialPoolSize; i++)
         {
             CreateNewObject();
         }
+
     }
 
     protected virtual GameObject CreateNewObject()
