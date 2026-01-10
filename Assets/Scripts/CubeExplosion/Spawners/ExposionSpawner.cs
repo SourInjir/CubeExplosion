@@ -12,21 +12,21 @@ public class ExplosionSpawner: ObjectSpawner
         _maxRadius = radius;
     }
 
-    public override void SpawnObject(Vector3 position)
+    public void SpawnObject(Vector3 position, int generationCount = 1)
     {
         var explosion = _pool.Get();
         var explosionController = explosion.GetComponent<ExplosionObject>();
-        explosionController.Initialize(PrepareDto(position));
+        explosionController.Initialize(PrepareDto(position, generationCount));
         _pool.ReturnWithDelay(explosion, ObjectLifeTime);
     }
 
-    private ExplosionData PrepareDto(Vector3 position)
+    private ExplosionData PrepareDto(Vector3 position, int generationCount = 1)
     {
         return new ExplosionData
         {
             Position = position,
             Radius = _maxRadius,
-            Force = _maxForce,
+            Force = _maxForce * generationCount,
         };
     }
 
