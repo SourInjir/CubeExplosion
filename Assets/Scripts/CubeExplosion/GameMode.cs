@@ -1,4 +1,3 @@
-// GameManager.cs
 using UnityEngine;
 
 public class GameMode : MonoBehaviour
@@ -29,6 +28,7 @@ public class GameMode : MonoBehaviour
         _explosionSpawner = new ExplosionSpawner(_explosionPool, _explosionRadius, _explosionForce);
         SubscribeToEvents();
     }
+
     private void OnDestroy()
     {
         UnsubscribeToEvents();

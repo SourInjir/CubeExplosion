@@ -30,17 +30,18 @@ public class CubeSpawner: ObjectSpawner
         var obj = _pool.Get();
         obj.transform.position = position;
         obj.transform.localScale = scale * ScaleFactor;
-
-        if (obj.TryGetComponent<Renderer>(out var renderer))
+        if (obj.TryGetComponent<IClickableObject>(out var clickableObject))
         {
-            renderer.material.color = new Color(Random.value, Random.value, Random.value);
-        }
+            Renderer renderer = clickableObject.GetRenderer();
 
-        if (obj.TryGetComponent<Rigidbody>(out var rb))
-        {
-            rb.AddExplosionForce(_force, obj.transform.position, _radius);
-        }
+            if (renderer)
+                renderer.material.color = new Color(Random.value, Random.value, Random.value);
 
+            Rigidbody rigidbody = clickableObject.GetRigidbody();
+
+            if (rigidbody)
+                rigidbody.AddExplosionForce(_force, obj.transform.position, _radius);
+        }
         _pool.ReturnWithDelay(obj, ObjectLifeTime);
         return obj;
     }

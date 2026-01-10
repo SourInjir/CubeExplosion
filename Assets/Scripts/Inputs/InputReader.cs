@@ -19,7 +19,7 @@ public class InputReader : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(LeftMouseButton) == false) 
             return;
-       
+
         _eventChannel.DispatchMouseClickEvent();  
     }
 }

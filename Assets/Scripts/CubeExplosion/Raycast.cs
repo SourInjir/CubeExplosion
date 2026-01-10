@@ -23,14 +23,7 @@ public class Raycast : MonoBehaviour
         foreach (RaycastHit hit in hits)
         {
 
-            if (hit.collider is TerrainCollider)
-            {
-                continue;
-            }
-
-            IClickableObject clickable = hit.collider.GetComponent<IClickableObject>();
-
-            if (clickable != null)
+            if (hit.collider.TryGetComponent<IClickableObject>(out var clickable))
             {
                 _eventChannel.DispatchEvent(hit.collider.gameObject);
                 break;

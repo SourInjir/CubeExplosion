@@ -1,6 +1,6 @@
-// ExplosionController.cs
 using UnityEngine;
 
+[RequireComponent(typeof(ParticleSystem))]
 public class ExplosionObject : MonoBehaviour
 {
     private const float SpeedFactor = 0.5f;
@@ -66,7 +66,7 @@ public class ExplosionObject : MonoBehaviour
         foreach (Collider collider in colliders)
         {
 
-            if (collider.TryGetComponent<Rigidbody>(out var rb))
+            if (collider.TryGetComponent<IClickableObject>(out var clickableObject))
             {
                 Vector3 direction = (collider.transform.position - transform.position).normalized;
                 float distance = Vector3.Distance(transform.position, collider.transform.position);
@@ -75,7 +75,7 @@ public class ExplosionObject : MonoBehaviour
                 float forceMultiplier = _forceFalloffCurve.Evaluate(normalizedDistance);
                 float force = _maxForce * forceMultiplier;
 
-                rb.AddForce(direction * force, ForceMode.Impulse);
+                clickableObject.GetRigidbody().AddForce(direction * force, ForceMode.Impulse);
             }
 
         }

@@ -1,4 +1,3 @@
-// CubePool.cs
 using UnityEngine;
 
 public class CubePool : Pool

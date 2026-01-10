@@ -175,3 +175,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2535d3abb3c2645b54ca2e5f1fd976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClickableObject
+  _renderer: {fileID: 2057491106976385836}
+  _rigidbody: {fileID: 61473044106104180}

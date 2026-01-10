@@ -1,4 +1,3 @@
-// CubeEventChannel.cs
 using UnityEngine;
 using System;
 
