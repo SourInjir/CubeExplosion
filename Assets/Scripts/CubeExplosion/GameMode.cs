@@ -57,7 +57,7 @@ public class GameMode : MonoBehaviour
         }
         else
         {
-            _explosionSpawner.SpawnObject(obj.transform.position);
+            _explosionSpawner.SpawnObject(obj.transform.position, generationCount);
         }
 
         obj.SetActive(false);
