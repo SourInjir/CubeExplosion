@@ -3,12 +3,12 @@ using System;
 
 public class SystemEventChannel : MonoBehaviour
 {
-    public event Action<GameObject> ObjectClicked;
+    public event Action<GameObject, int> ObjectClicked;
     public event Action LeftMouseClick;
 
-    public void DispatchEvent(GameObject obj)
+    public void DispatchEvent(GameObject obj, int generationCount)
     {
-        ObjectClicked?.Invoke(obj);
+        ObjectClicked?.Invoke(obj, generationCount);
     }
 
     public void DispatchMouseClickEvent()

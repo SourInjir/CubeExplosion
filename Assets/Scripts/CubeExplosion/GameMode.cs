@@ -16,9 +16,6 @@ public class GameMode : MonoBehaviour
     [SerializeField] private float _spawnExplosionRadius = 5f;
     [SerializeField] private float _spawnExplosionForce = 100f;
 
-    private float spawnFactor = 1f;
-   
-
     private CubeSpawner _cubeSpawner;
     private ExplosionSpawner _explosionSpawner;
 
@@ -34,10 +31,10 @@ public class GameMode : MonoBehaviour
         UnsubscribeToEvents();
     }
 
-    private bool CanSpawn()
+    private bool CanSpawn(int generationCount)
     {
         float chanse = Random.Range(0, SpawnChanse);
-        float currentChanse = SpawnChanse / spawnFactor;
+        float currentChanse = SpawnChanse / generationCount;
         return currentChanse >= chanse;
     }
 
@@ -51,13 +48,12 @@ public class GameMode : MonoBehaviour
         _systemEventChannel.ObjectClicked -= HandleSpawnEvent;
     }
 
-    private void HandleSpawnEvent(GameObject obj)
+    private void HandleSpawnEvent(GameObject obj, int generationCount)
     {
 
-        if (CanSpawn() == true)
+        if (CanSpawn(generationCount) == true)
         {
             _cubeSpawner.SpawnRandomQuantity(MinSpawnCount, MaxSpawnCount, obj.transform.position, obj.transform.localScale);
-            spawnFactor *= 2;
         }
         else
         {

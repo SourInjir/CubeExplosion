@@ -25,7 +25,7 @@ public class Raycast : MonoBehaviour
 
             if (hit.collider.TryGetComponent<IClickableObject>(out var clickable))
             {
-                _eventChannel.DispatchEvent(hit.collider.gameObject);
+                _eventChannel.DispatchEvent(hit.collider.gameObject, clickable.GetGenerationCount());
                 break;
             }
 

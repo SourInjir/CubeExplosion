@@ -41,6 +41,8 @@ public class CubeSpawner: ObjectSpawner
 
             if (rigidbody)
                 rigidbody.AddExplosionForce(_force, obj.transform.position, _radius);
+
+            clickableObject.IncrementGenerationCount();
         }
         _pool.ReturnWithDelay(obj, ObjectLifeTime);
         return obj;
