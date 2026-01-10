@@ -41,7 +41,7 @@ public class CubeSpawner: ObjectSpawner
             rb.AddExplosionForce(_force, obj.transform.position, _radius);
         }
 
-        _pool.ReturnWithDelay(obj, ObjectLifeTime);
+        //_pool.ReturnWithDelay(obj, ObjectLifeTime);
         return obj;
     }
 

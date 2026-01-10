@@ -1,11 +1,13 @@
 // GameManager.cs
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GameMode : MonoBehaviour
 {
     private const float SpawnChanse = 100f;
     private const int MinSpawnCount = 2;
     private const int MaxSpawnCount = 6;
+    private const float SpawnDelay = 1.0f;
 
     [Header("Dependencies")]
     [SerializeField] private SystemEventChannel _systemEventChannel;
@@ -29,9 +31,21 @@ public class GameMode : MonoBehaviour
         _explosionSpawner = new ExplosionSpawner(_explosionPool, _explosionRadius, _explosionForce);
         SubscribeToEvents();
     }
+
+    private void Start()
+    {
+        StartCoroutine(CubeRain());
+    }
+
     private void OnDestroy()
     {
+        StopAllCoroutines();
         UnsubscribeToEvents();
+    }
+
+    private void Update()
+    {
+
     }
 
     private bool CanSpawn()
@@ -66,5 +80,14 @@ public class GameMode : MonoBehaviour
 
         obj.SetActive(false);
 
+    }
+
+    protected System.Collections.IEnumerator CubeRain()
+    {
+        while (true)
+        {
+            _cubeSpawner.SpawnRandomQuantity(MinSpawnCount, MaxSpawnCount, new Vector3(0, 15, 0), new Vector3(1, 1, 1));
+            yield return new WaitForSeconds(SpawnDelay);
+        }
     }
 }
